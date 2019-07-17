@@ -39,8 +39,14 @@ def sgd(w, dw, config=None):
     """
     if config is None: config = {}
     config.setdefault('learning_rate', 1e-2)
-
+    # if w.shape[0] == 3072:
+        # print(w.shape)
+        # print(w)
+        # print("----------------------------")
+        # print(dw)
+        # print("=============================")
     w -= config['learning_rate'] * dw
+
     return w, config
 
 

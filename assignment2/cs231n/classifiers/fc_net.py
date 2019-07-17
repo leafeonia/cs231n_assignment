@@ -202,6 +202,8 @@ class FullyConnectedNet(object):
             prev_dim = dim
         self.params['W%d'%(self.num_layers)] = weight_scale * np.random.randn(prev_dim, num_classes)
         self.params['b%d'%(self.num_layers)] = np.zeros(num_classes)
+
+
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
@@ -262,11 +264,13 @@ class FullyConnectedNet(object):
         ar_cache = {}
         ar_out = {}
         x = X
-        for i in range(self.num_layers-1):
-            ar_out[i], ar_cache[i] = affine_relu_forward(x, self.params['W%d'%(i+1)],
-                                                         self.params['b%d'%(i+1)])
+        for i in range(1,self.num_layers):
+            ar_out[i], ar_cache[i] = affine_relu_forward(x, self.params['W%d'%(i)],
+                                                         self.params['b%d'%(i)])
             x = ar_out[i]
-        scores = x
+        scores, ar_cache[self.num_layers] = affine_forward(x,self.params['W%d'%(self.num_layers)],
+                                                           self.params['b%d'%(self.num_layers)])
+
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
@@ -290,11 +294,17 @@ class FullyConnectedNet(object):
         # of 0.5 to simplify the expression for the gradient.                      #
         ############################################################################
         loss, dscore = softmax_loss(scores, y)
-        for i in range(self.num_layers-1):
-            loss += 0.5 * self.reg * np.sum(self.params['W%d'%(i+1)]*self.params['W%d'%(i+1)])
+        for i in range(1,self.num_layers+1):
+            loss += 0.5 * self.reg * np.sum(self.params['W%d'%(i)]*self.params['W%d'%(i)])
 
-        for i in range(self.num_layers,0,-1):
-            print(i)
+        dout, grads['W%d'%(self.num_layers)], grads['b%d'%(self.num_layers)] = \
+            affine_backward(dscore, ar_cache[self.num_layers])
+        for i in range(self.num_layers-1,0,-1):
+            dout, grads['W%d'%(i)], grads['b%d'%(i)] = affine_relu_backward(dout, ar_cache[i])
+
+        for i in range(1,self.num_layers+1):
+            grads['W%d'%(i)] += self.reg * self.params['W%d'%(i)]
+
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
