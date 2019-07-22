@@ -202,8 +202,10 @@ class FullyConnectedNet(object):
             prev_dim = dim
         self.params['W%d'%(self.num_layers)] = weight_scale * np.random.randn(prev_dim, num_classes)
         self.params['b%d'%(self.num_layers)] = np.zeros(num_classes)
-
-
+        if self.use_batchnorm == True:
+            for i, dim in enumerate(hidden_dims):
+                self.params['gamma%d'%(i+1)] = np.ones(dim)
+                self.params['beta%d'%(i+1)] = np.zeros(dim)
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
@@ -264,10 +266,17 @@ class FullyConnectedNet(object):
         ar_cache = {}
         ar_out = {}
         x = X
-        for i in range(1,self.num_layers):
-            ar_out[i], ar_cache[i] = affine_relu_forward(x, self.params['W%d'%(i)],
-                                                         self.params['b%d'%(i)])
-            x = ar_out[i]
+        if self.use_batchnorm == False:
+            for i in range(1,self.num_layers):
+                ar_out[i], ar_cache[i] = affine_relu_forward(x, self.params['W%d'%(i)],
+                                                             self.params['b%d'%(i)])
+                x = ar_out[i]
+        else:
+            for i in range(1,self.num_layers):
+                ar_out[i], ar_cache[i] = affine_batchnorm_relu_forward\
+                    (x, self.params['W%d'%(i)],self.params['b%d'%(i)],
+                     self.params['gamma%d'%(i)], self.params['beta%d'%(i)],self.bn_params[i-1])
+                x = ar_out[i]
         scores, ar_cache[self.num_layers] = affine_forward(x,self.params['W%d'%(self.num_layers)],
                                                            self.params['b%d'%(self.num_layers)])
 
@@ -299,8 +308,13 @@ class FullyConnectedNet(object):
 
         dout, grads['W%d'%(self.num_layers)], grads['b%d'%(self.num_layers)] = \
             affine_backward(dscore, ar_cache[self.num_layers])
-        for i in range(self.num_layers-1,0,-1):
-            dout, grads['W%d'%(i)], grads['b%d'%(i)] = affine_relu_backward(dout, ar_cache[i])
+        if self.use_batchnorm == False:
+            for i in range(self.num_layers-1,0,-1):
+                dout, grads['W%d'%(i)], grads['b%d'%(i)] = affine_relu_backward(dout, ar_cache[i])
+        else:
+            for i in range(self.num_layers - 1, 0, -1):
+                dout, grads['W%d' % (i)], grads['b%d' % (i)], grads['gamma%d' % (i)],\
+                    grads['beta%d'%(i)] = affine_batchnorm_relu_backward(dout, ar_cache[i])
 
         for i in range(1,self.num_layers+1):
             grads['W%d'%(i)] += self.reg * self.params['W%d'%(i)]
