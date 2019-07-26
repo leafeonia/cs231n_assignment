@@ -265,18 +265,28 @@ class FullyConnectedNet(object):
         ############################################################################
         ar_cache = {}
         ar_out = {}
+        dropout_cache = {}
         x = X
         if self.use_batchnorm == False:
             for i in range(1,self.num_layers):
                 ar_out[i], ar_cache[i] = affine_relu_forward(x, self.params['W%d'%(i)],
                                                              self.params['b%d'%(i)])
                 x = ar_out[i]
+                if self.use_dropout:
+                    ar_out[i], dropout_cache[i] = dropout_forward(x,self.dropout_param)
+                    x = ar_out[i]
+
         else:
             for i in range(1,self.num_layers):
                 ar_out[i], ar_cache[i] = affine_batchnorm_relu_forward\
                     (x, self.params['W%d'%(i)],self.params['b%d'%(i)],
                      self.params['gamma%d'%(i)], self.params['beta%d'%(i)],self.bn_params[i-1])
                 x = ar_out[i]
+                if self.use_dropout:
+                    ar_out[i], dropout_cache[i] = dropout_forward(x,self.dropout_param)
+                    x = ar_out[i]
+
+
         scores, ar_cache[self.num_layers] = affine_forward(x,self.params['W%d'%(self.num_layers)],
                                                            self.params['b%d'%(self.num_layers)])
 
@@ -310,11 +320,17 @@ class FullyConnectedNet(object):
             affine_backward(dscore, ar_cache[self.num_layers])
         if self.use_batchnorm == False:
             for i in range(self.num_layers-1,0,-1):
+                if self.use_dropout:
+                    dout = dropout_backward(dout,dropout_cache[i])
                 dout, grads['W%d'%(i)], grads['b%d'%(i)] = affine_relu_backward(dout, ar_cache[i])
+
         else:
             for i in range(self.num_layers - 1, 0, -1):
+                if self.use_dropout:
+                    dout = dropout_backward(dout,dropout_cache[i])
                 dout, grads['W%d' % (i)], grads['b%d' % (i)], grads['gamma%d' % (i)],\
                     grads['beta%d'%(i)] = affine_batchnorm_relu_backward(dout, ar_cache[i])
+
 
         for i in range(1,self.num_layers+1):
             grads['W%d'%(i)] += self.reg * self.params['W%d'%(i)]
