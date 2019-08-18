@@ -394,7 +394,33 @@ def conv_forward_naive(x, w, b, conv_param):
     # TODO: Implement the convolutional forward pass.                         #
     # Hint: you can use the function np.pad for padding.                      #
     ###########################################################################
-    pass
+    pad = conv_param['pad']
+    stride = conv_param['stride']
+    # print(pad)
+    # print(x)
+    x = np.pad(x,((0,0),(0,0),(pad,pad),(pad,pad)),'constant',constant_values=0)
+    # print("=====")
+    # print(x)
+    N, C, H, W = x.shape
+    F, _, HH, WW = w.shape
+    # print("H = %d, HH = %d, stride = %d" % (H, HH, stride))
+    H_prime = int(1 + (H - HH) / stride)
+    W_prime = int(1 + (W - WW) / stride)
+    out = np.zeros((N, F, H_prime, W_prime))
+    # print(out.shape)
+    for i in range(H_prime):
+        for j in range(W_prime):
+            for k in range(N):
+                mask = x[k, :, i * stride:i * stride + HH, j * stride: j * stride + WW]
+                for l in range(F):
+                    # print(mask.reshape(1, -1))
+                    # print(w[l, :, :, :].reshape(1, -1))
+                    # print( np.sum(mask.reshape(1, -1) * w[l, :, :, :].reshape(1, -1)))
+                    out[k, l, i, j] = np.sum(mask.reshape(1, -1) * w[l, :, :, :].reshape(1, -1))
+    for i in range(F):
+        out[:, i, :, :] += b[i]
+
+
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -419,7 +445,39 @@ def conv_backward_naive(dout, cache):
     ###########################################################################
     # TODO: Implement the convolutional backward pass.                        #
     ###########################################################################
-    pass
+    x, w, b, conv_param = cache
+    # - x: Input data of shape (N, C, H, W)       (4,3,5,5)
+    # - w: Filter weights of shape (F, C, HH, WW) (2,3,3,3)
+    # - out: Output data, of shape (N, F, H', W') (4,2,5,5)
+    #   where H' and W' are given by
+    #   H' = 1 + (H + 2 * pad - HH) / stride
+    #   W' = 1 + (W + 2 * pad - WW) / stride
+    pad = conv_param['pad']
+    stride = conv_param['stride']
+    N, C, H, W = x.shape
+    F, _, HH, WW = w.shape
+    H_prime = int(1 + (H - HH) / stride)
+    W_prime = int(1 + (W - WW) / stride)
+
+    dx_pad = np.zeros_like(x)
+    dw = np.zeros_like(w)
+    print(dout.shape)
+    db = np.sum(dout,axis=(0,2,3))
+    for i in range(H_prime):
+        # print("i:",i)
+        for j in range(W_prime):
+            # print("j:",j)
+            for k in range(N):
+                # print("k:",k)
+                for l in range(F):
+                    # print("l:",l)
+                    # print(dx_pad.shape)
+                    # print(dout.shape)
+                    # print(w.shape)
+                    dx_pad[k, :, i*stride: i*stride + HH, j*stride : j*stride + WW]\
+                        += dout[k, l, i, j] * w[l, :, :, :]
+                    dw[l, :, :, :] += dout[k, l, i, j] * x[k, :, i*stride: i*stride + HH, j*stride : j*stride + WW]
+    dx = dx_pad[:,:,pad:-pad,pad:-pad]
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
