@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="01939f59-f05c-4068-b64a-66fdd7dec457" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../4_ConvolutionalNetworks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../4_ConvolutionalNetworks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PyTorch.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../PyTorch.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TensorFlow.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../TensorFlow.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers.py" afterDir="false" />
     </list>
@@ -19,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/layers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="478" column="114" selection-start-line="478" selection-start-column="114" selection-end-line="478" selection-end-column="114" />
+            <state relative-caret-position="254">
+              <caret line="560" column="36" lean-forward="true" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -88,10 +86,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="width" value="815" />
-    <option name="height" value="560" />
+  <component name="ProjectFrameBounds">
+    <option name="width" value="1943" />
+    <option name="height" value="1103" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -184,7 +181,10 @@
       <workItem from="1565757289376" duration="253000" />
       <workItem from="1565885084834" duration="589000" />
       <workItem from="1565921010864" duration="3784000" />
-      <workItem from="1566093161605" duration="12599000" />
+      <workItem from="1566093161605" duration="12726000" />
+      <workItem from="1566182975533" duration="745000" />
+      <workItem from="1566184125001" duration="3417000" />
+      <workItem from="1566199596329" duration="2204000" />
     </task>
     <task id="LOCAL-00001" summary="2.1-2">
       <created>1563258053818</created>
@@ -221,17 +221,24 @@
       <option name="project" value="LOCAL" />
       <updated>1564164740411</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2-4 convolution: forward and backward">
+      <created>1566142147019</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1566142147020</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64251000" />
+    <option name="totallyTimeSpent" value="70744000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="0" y="0" width="1554" height="882" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18498659" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14171124" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -246,12 +253,12 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" visible="true" weight="0.08498584" />
+      <window_info anchor="bottom" id="Python Console" order="12" visible="true" weight="0.16266666" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info active="true" anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="4" side_tool="true" visible="true" weight="0.21179625" />
+      <window_info active="true" anchor="right" x="0" y="0" width="337" height="638" id="Documentation" order="4" side_tool="true" visible="true" weight="0.1223262" />
       <window_info anchor="right" id="Database" order="5" />
     </layout>
   </component>
@@ -264,7 +271,8 @@
     <MESSAGE value="2-2 BatchNormalization: backward" />
     <MESSAGE value="2-2 BatchNormalization: finished" />
     <MESSAGE value="2-3 dropout: finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="2-3 dropout: finished" />
+    <MESSAGE value="2-4 convolution: forward and backward" />
+    <option name="LAST_COMMIT_MESSAGE" value="2-4 convolution: forward and backward" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../../assignment1/cs231n/classifiers/softmax.py">
@@ -290,8 +298,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="478" column="114" selection-start-line="478" selection-start-column="114" selection-end-line="478" selection-end-column="114" />
+        <state relative-caret-position="254">
+          <caret line="560" column="36" lean-forward="true" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

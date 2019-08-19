@@ -503,7 +503,20 @@ def max_pool_forward_naive(x, pool_param):
     ###########################################################################
     # TODO: Implement the max pooling forward pass                            #
     ###########################################################################
-    pass
+    N, C, H, W = x.shape
+    pool_height = pool_param['pool_height']
+    pool_width = pool_param['pool_width']
+    stride = pool_param['stride']
+    W2 = (int)((W - pool_width) / stride + 1)
+    H2 = (int)((H - pool_height) / stride + 1)
+    # print(W2,H2)
+    out = np.zeros((N, C, H2, W2))
+    for n in range(N):
+        for c in range(C):
+            for i in range(H2):
+                for j in range(W2):
+                    out[n, c, i, j] = np.max(x[n, c, i*stride: i*stride + pool_height, j*stride: j*stride + pool_width])
+
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -526,10 +539,41 @@ def max_pool_backward_naive(dout, cache):
     ###########################################################################
     # TODO: Implement the max pooling backward pass                           #
     ###########################################################################
-    pass
+    x, pool_param = cache
+    N, C, H, W = x.shape
+    pool_height = pool_param['pool_height']
+    pool_width = pool_param['pool_width']
+    stride = pool_param['stride']
+    W2 = int((W - pool_width) / stride + 1)
+    H2 = int((H - pool_height) / stride + 1)
+    dx = np.zeros_like(x)
+    for n in range(N):
+        for c in range(C):
+            for i in range(H2):
+                for j in range(W2):
+                    mask = x[n, c, i*stride: i*stride + pool_height, j*stride: j*stride + pool_width]
+                    # print(mask)
+                    dx_mask = dx[n, c, i*stride: i*stride + pool_height, j*stride: j*stride + pool_width]
+                    tmp = dx_mask.reshape((1, -1))
+                    tmp[0, np.argmax(mask)] = 1
+                    # print(tmp)
+                    dx_mask += tmp.reshape(dx_mask.shape) * dout[n, c, i, j]
+                    # print(dx_mask)
+                    # print(dx)
+    # dx = np.zeros_like(x)
+    # for i in range(H2):
+    #     for j in range(W2):
+    #         mask = x[:, :, i * stride: i * stride + pool_height, j * stride: j * stride + pool_width]
+    #         # print(mask)
+    #         dx_mask = dx[:, :, i * stride: i * stride + pool_height, j * stride: j * stride + pool_width]
+    #         tmp = dx_mask.reshape((1, -1))
+    #         tmp[0, np.argmax(mask)] = 1
+    #         # print(tmp)
+    #         dx_mask += tmp.reshape(dx_mask.shape) * (dout[:, :, i, j])[:, :, None, None]
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
+    # print(dx)
     return dx
 
 
