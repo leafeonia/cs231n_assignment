@@ -461,7 +461,7 @@ def conv_backward_naive(dout, cache):
 
     dx_pad = np.zeros_like(x)
     dw = np.zeros_like(w)
-    print(dout.shape)
+    # print(dout.shape)
     db = np.sum(dout,axis=(0,2,3))
     for i in range(H_prime):
         # print("i:",i)
