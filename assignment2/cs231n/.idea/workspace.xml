@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01939f59-f05c-4068-b64a-66fdd7dec457" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../PyTorch.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../PyTorch.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -205,7 +204,7 @@
       <workItem from="1566199596329" duration="5543000" />
       <workItem from="1566310465895" duration="5729000" />
       <workItem from="1566354913484" duration="5303000" />
-      <workItem from="1566379025459" duration="2957000" />
+      <workItem from="1566379025459" duration="3234000" />
     </task>
     <task id="LOCAL-00001" summary="2.1-2">
       <created>1563258053818</created>
@@ -270,15 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1566396200104</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="2-5 Part 01: vanilla PyTorch model">
+      <created>1566400388773</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1566400388774</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88072000" />
+    <option name="totallyTimeSpent" value="88349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14745308" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -317,7 +322,8 @@
     <MESSAGE value="2-4 Max pooling layer" />
     <MESSAGE value="2-4 Three-layer convNet" />
     <MESSAGE value="2-4 Part 04: Spatial Normalization" />
-    <option name="LAST_COMMIT_MESSAGE" value="2-4 Part 04: Spatial Normalization" />
+    <MESSAGE value="2-5 Part 01: vanilla PyTorch model" />
+    <option name="LAST_COMMIT_MESSAGE" value="2-5 Part 01: vanilla PyTorch model" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../../assignment1/cs231n/classifiers/softmax.py">
