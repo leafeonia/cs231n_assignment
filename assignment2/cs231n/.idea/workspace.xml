@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01939f59-f05c-4068-b64a-66fdd7dec457" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/GANs-PyTorch.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/LSTM_Captioning.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/NetworkVisualization-PyTorch.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/RNN_Captioning.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../assignment3/StyleTransfer-PyTorch.ipynb" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +138,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="E:/14A/housing_learning" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../assignment3" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -205,6 +209,7 @@
       <workItem from="1566310465895" duration="5729000" />
       <workItem from="1566354913484" duration="5303000" />
       <workItem from="1566379025459" duration="3234000" />
+      <workItem from="1566959653572" duration="29000" />
     </task>
     <task id="LOCAL-00001" summary="2.1-2">
       <created>1563258053818</created>
@@ -280,12 +285,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88349000" />
+    <option name="totallyTimeSpent" value="88378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14745308" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13605899" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
