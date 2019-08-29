@@ -59,7 +59,9 @@ def image_from_url(url):
     We write the image to a temporary file then read it back. Kinda gross.
     """
     try:
+        print("FA")
         f = urllib.request.urlopen(url)
+        print("FA2")
         _, fname = tempfile.mkstemp()
         with open(fname, 'wb') as ff:
             ff.write(f.read())
